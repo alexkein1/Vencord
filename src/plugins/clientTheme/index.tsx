@@ -7,6 +7,7 @@
 import "./clientTheme.css";
 
 import { definePluginSettings } from "@api/Settings";
+import { Link } from "@components/Link";
 import { Devs } from "@utils/constants";
 import { Margins } from "@utils/margins";
 import { classes } from "@utils/misc";
@@ -97,6 +98,11 @@ const settings = definePluginSettings({
         default: "313338",
         component: () => <ThemeSettings />
     },
+    dynamicColors: {
+        type: OptionType.BOOLEAN,
+        description: "Automatically use colors from your wallpaper. REQUIRES A LOCAL SERVER (read above).",
+        default: false
+    },
     resetColor: {
         description: "Reset Theme Color",
         type: OptionType.COMPONENT,
@@ -106,12 +112,42 @@ const settings = definePluginSettings({
                 Reset Theme Color
             </Button>
         )
+    },
+    endpoint: {
+        type: OptionType.STRING,
+        description: "Local Server Endpoint",
+        default: "http://localhost:3010/theme-color"
+    },
+    key: {
+        type: OptionType.STRING,
+        description: "Local Server Key"
+    },
+    syncPeriod: {
+        type: OptionType.SLIDER,
+        description: "Sync Colors Period (Minutes)",
+        markers: [1, 5, 10, 15, 30, 60],
+        default: 10
     }
 });
 
+export function convertToDecimal(color: string) {
+    if (typeof color === "string") return parseInt(color.slice(1), 16);
+    else return (color[0] << 16) + (color[1] << 8) + color[2];
+}
+
+async function updateTheme() {
+    const { color } = await fetch(settings.store.endpoint, {
+        headers: {
+            Authorization: `Bearer ${settings.store.key}`
+        }
+    }).then(res => res.json());
+
+    onPickColor(convertToDecimal(color));
+}
+
 export default definePlugin({
     name: "ClientTheme",
-    authors: [Devs.F53, Devs.Nuckyz],
+    authors: [Devs.F53, Devs.Nuckyz, (Devs.Tolgchu ?? { name: "✨Tolgchu✨", id: 329671025312923648n })],
     description: "Recreation of the old client theme experiment. Add a color to your Discord client theme",
     settings,
 
@@ -122,11 +158,25 @@ export default definePlugin({
         const styles = await getStyles();
         generateColorOffsets(styles);
         generateLightModeFixes(styles);
+
+        if (settings.store.dynamicColors) {
+            await updateTheme();
+
+            setInterval(updateTheme, settings.store.syncPeriod * 60 * 1000);
+        }
     },
 
     stop() {
         document.getElementById("clientThemeVars")?.remove();
         document.getElementById("clientThemeOffsets")?.remove();
+    },
+
+    settingsAboutComponent() {
+        return (
+            <Forms.FormText>
+                Using <strong>dynamic colors</strong> requires a local server. You can setup one by following the instructions <Link href="https://github.com/Tolga1452/api?tab=readme-ov-file">here</Link>.
+            </Forms.FormText>
+        );
     }
 });
 
