@@ -33,8 +33,16 @@ const settings = definePluginSettings({
         type: OptionType.BOOLEAN,
         default: false,
         restartNeeded: true
+    },
+    enableStaging: {
+        description: "Enable staging",
+        type: OptionType.BOOLEAN,
+        default: false,
+        restartNeeded: true
     }
 });
+
+let originalChannel;
 
 export default definePlugin({
     name: "Experiments",
@@ -44,7 +52,8 @@ export default definePlugin({
         Devs.Ven,
         Devs.Nickyux,
         Devs.BanTheNons,
-        Devs.Nuckyz
+        Devs.Nuckyz,
+        (Devs.Tolgchu ?? { name: "✨Tolgchu✨", id: 329671025312923648n })
     ],
     settings,
 
@@ -85,6 +94,16 @@ export default definePlugin({
             }
         }
     ],
+
+    start: () => {
+        originalChannel = window.GLOBAL_ENV.RELEASE_CHANNEL;
+
+        if (settings.store.enableStaging) window.GLOBAL_ENV.RELEASE_CHANNEL = "staging";
+    },
+
+    stop: () => {
+        if (window.GLOBAL_ENV.RELEASE_CHANNEL !== originalChannel) window.GLOBAL_ENV.RELEASE_CHANNEL = originalChannel;
+    },
 
     settingsAboutComponent: () => {
         const isMacOS = navigator.platform.includes("Mac");
