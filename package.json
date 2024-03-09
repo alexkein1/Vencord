@@ -28,7 +28,8 @@
         "testWeb": "pnpm lint && pnpm buildWeb && pnpm testTsc",
         "testTsc": "tsc --noEmit",
         "uninject": "node scripts/runInstaller.mjs",
-        "watch": "node --require=./scripts/suppressExperimentalWarnings.js scripts/build/build.mjs --watch"
+        "watch": "node --require=./scripts/suppressExperimentalWarnings.js scripts/build/build.mjs --watch",
+        "sync": "git checkout -b Vendicated-main main && git pull https://github.com/Vendicated/Vencord.git main && git add . && git commit -m \"Update Vencord\" && git push origin Vendicated-main && gh pr create --base main --head Vendicated-main --title \"Update Vencord\" --body \"This PR updates Vencord to the latest version.\""
     },
     "dependencies": {
         "@sapphi-red/web-noise-suppressor": "0.3.3",
