@@ -34,8 +34,8 @@ const settings = definePluginSettings({
         default: false,
         restartNeeded: true
     },
-    enableStaging: {
-        description: "Enable staging",
+    staging: {
+        description: "Use staging channel",
         type: OptionType.BOOLEAN,
         default: false,
         restartNeeded: true
@@ -98,7 +98,7 @@ export default definePlugin({
     start: () => {
         originalChannel = window.GLOBAL_ENV.RELEASE_CHANNEL;
 
-        if (settings.store.enableStaging) window.GLOBAL_ENV.RELEASE_CHANNEL = "staging";
+        if (settings.store.staging) window.GLOBAL_ENV.RELEASE_CHANNEL = "staging";
     },
 
     stop: () => {
