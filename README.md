@@ -1,4 +1,14 @@
-a cat programmer's crazy vencord plugins
+a stupid cat programmer's crazy vencord plugins
+
+## FAQ
+### Is this original Vencord?
+No, this is a fork of Vencord with unofficial plugins. You can find the original Vencord [here](https://github.com/Vendicated/Vencord).
+
+### Is this fork safe?
+Yes but if you don't trust, you can check the source code or ask someone professional to check it for you.
+
+### Is this fork up-to-date with original Vencord?
+Yes but we don't update the fork immediately after the original Vencord is updated and you will need to update it manually. We will release a new version when there is necessary changes.
 
 ## How to use?
 
