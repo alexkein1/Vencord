@@ -19,6 +19,10 @@ If you want to use these plugins in your Discord client, please follow the instr
 1. Download the latest version of Node.js from [here](https://nodejs.org/en/download/current).
 2. Download Git from [here](https://git-scm.com/).
 3. Open a terminal and run the following commands:
+
+> [!IMPORTANT]  
+> Do not run any of these commands other than `npm install -g pnpm` as administrator, since you can cause updating the client to break.
+
 ```bash
 npm install -g pnpm
 git clone https://github.com/Tolga1452/Vencord.git
