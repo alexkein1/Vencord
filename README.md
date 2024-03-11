@@ -1,53 +1,96 @@
-a stupid cat programmer's crazy vencord plugins
+`😺` A stupid cat programmer's crazy Vencord plugins.
 
-join our [discord server](https://discord.gg/PxDj9XeHkB) for more info
+`🗨️` Join our [Discord Server](https://discord.gg/PxDj9XeHkB) for more information.
 
-# FAQ
-## Is this original Vencord?
-No, this is a fork of Vencord with unofficial plugins. You can find the original Vencord [here](https://github.com/Vendicated/Vencord).
+# Frequently Asked Questions
+
+## Is this the original Vencord client modification?
+No, this is a fork of Vencord with unofficial plugins. You can find the original repository of Vencord [here](https://github.com/Vendicated/Vencord).
+
+---
 
 ## Is this fork safe?
-Yes but if you don't trust, you can check the source code or ask someone professional to check it for you.
+Yes, this repository is safe. If you don't trust it, feel free to look at the source code.
+
+---
 
 ## Is this fork up-to-date with original Vencord?
-Yes but we don't update the fork immediately after the original Vencord is updated and you will need to update it manually. We will release a new version when there is necessary changes.
+Yes, it usually is, but we don't update this fork immediatley after the original Vencord is updated. You'll have to update it manually. We release a new version when there are necessary changes.
 
-# How to use?
+---
 
-If you want to use these plugins in your Discord client, please follow the instructions below or watch [this tutorial](https://drive.google.com/file/d/1zlWv4t14ORqy7QuF_Sup7DLkf7pAgS90/view?usp=sharing).
-
+# Dependencies
 1. Download the latest version of Node.js from [here](https://nodejs.org/en/download/current).
-2. Download Git from [here](https://git-scm.com/).
+2. Download Git from [here](https://git-scm.com/download).
 3. Open a terminal and run the following commands:
 
-> [!IMPORTANT]  
-> Do not run any of these commands other than `npm install -g pnpm` as administrator, since you can cause updating the client to break.
+# Installing
+You can watch [this](https://drive.google.com/file/d/1zlWv4t14ORqy7QuF_Sup7DLkf7pAgS90/view?usp=sharing) tutorial to make it more easy.
 
-```bash
-npm install -g pnpm
-git clone https://github.com/Tolga1452/Vencord.git
-cd Vencord
-pnpm install --frozen-lockfile
-pnpm build
-pnpm inject
+---
+
+Install `pnpm`:
+
+> [!IMPORTANT]
+> This next command may need to be run as admin/root depending on your system, and you may need to close and reopen your terminal for `pnpm` to be in your PATH.
+
+
+```shell
+npm i -g pnpm
 ```
 
+---
+
+> [!IMPORTANT]
+> Make sure you aren't using an admin/root terminal from here onwards. It **will** mess up your Discord/Vencord instance and you **will** most likely have to reinstall.
+
+Clone Vencord:
+
+```shell
+git clone https://github.com/Vendicated/Vencord
+cd Vencord
+```
+---
+
+Install the dependencies needed:
+
+```shell
+pnpm install --frozen-lockfile
+```
+---
+
+Build this fork of Vencord:
+
+```shell
+pnpm build
+```
+---
+
+Inject Vencord into your client:
+
+> [!TIP]
+> If you want no errors about permissions, you can close your Discord client by exiting it via the tray. But, if you don't want to, that's fine. Either way works.
+
+```shell
+pnpm inject
+```
+---
 When you want to update your Discord client to the latest version of this fork, just run `npm run update`.
 
 # Plugins
 
-## Modified
+## Modified Plugins
 
 ### [ClientTheme](<https://github.com/Tolga1452/Vencord/tree/main/src/plugins/clientTheme>)
 
-- Added dynamic color support.
+- Added support for dynamic colour.
 
 ### [Experiments](<https://github.com/Tolga1452/Vencord/tree/main/src/plugins/experiments>)
 
-- Added staging toggle.
+- Added a toggle to switch the release channel to staging.
 
-## Added
+## Added PLugins
 
-- **[Become Catgirl](<https://github.com/Tolga1452/Vencord/tree/main/src/plugins/becomeCatgirl>):** Turns your messages into a catgirl message.
+- **[Become Catgirl](<https://github.com/Tolga1452/Vencord/tree/main/src/plugins/becomeCatgirl>):** Turns your messages into catgirl style.
 - **[Talk In Reverse](https://github.com/Tolga1452/Vencord/tree/main/src/plugins/talkInReverse):** Reverses the message content before sending it.
 - **[God Mode](https://github.com/Tolga1452/Vencord/tree/main/src/plugins/godMode):** Get all permissions (client-side).
