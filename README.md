@@ -48,7 +48,6 @@ npm i -g pnpm
 git clone https://github.com/Vendicated/Vencord
 cd Vencord
 ```
----
 
 Install the dependencies needed:
 
