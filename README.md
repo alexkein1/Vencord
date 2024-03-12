@@ -60,33 +60,34 @@ pnpm install --frozen-lockfile
 ```shell
 pnpm build
 ```
----
 
-Inject Vencord into your client:
+### Inject Vencord into your Discord client
 
 > [!TIP]
-> If you want no errors about permissions, you can close your Discord client by exiting it via the tray. But, if you don't want to, that's fine. Either way works.
+> If you having any errors while injecting, close the running Discord client and try again.
 
 ```shell
 pnpm inject
 ```
+
 ---
+
 When you want to update your Discord client to the latest version of this fork, just run `npm run update`.
 
 # Plugins
 
-## Modified Plugins
+## Modified
 
 ### [ClientTheme](<https://github.com/Tolga1452/Vencord/tree/main/src/plugins/clientTheme>)
 
-- Added support for dynamic colour.
+- Added dynamic color support.
 
 ### [Experiments](<https://github.com/Tolga1452/Vencord/tree/main/src/plugins/experiments>)
 
 - Added a toggle to switch the release channel to staging.
 
-## Added PLugins
+## Added
 
-- **[Become Catgirl](<https://github.com/Tolga1452/Vencord/tree/main/src/plugins/becomeCatgirl>):** Turns your messages into catgirl style.
+- **[Become Catgirl](<https://github.com/Tolga1452/Vencord/tree/main/src/plugins/becomeCatgirl>):** Turns your messages into a catgirl message.
 - **[Talk In Reverse](https://github.com/Tolga1452/Vencord/tree/main/src/plugins/talkInReverse):** Reverses the message content before sending it.
 - **[God Mode](https://github.com/Tolga1452/Vencord/tree/main/src/plugins/godMode):** Get all permissions (client-side).
