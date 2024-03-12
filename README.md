@@ -42,7 +42,7 @@ npm i -g pnpm
 > [!IMPORTANT]
 > Make sure you aren't using an admin/root terminal from here onwards. It **will** mess up your Discord/Vencord instance and you **will** most likely have to reinstall.
 
-Clone Vencord:
+### Clone the fork
 
 ```shell
 git clone https://github.com/Vendicated/Vencord
