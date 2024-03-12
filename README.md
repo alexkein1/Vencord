@@ -7,7 +7,6 @@
 ## Is this the original Vencord client modification?
 No, this is a fork of Vencord with unofficial plugins. You can find the original repository of Vencord [here](https://github.com/Vendicated/Vencord).
 
----
 
 ## Is this fork safe?
 Yes, this repository is safe. If you don't trust it, feel free to look at the source code.
