@@ -27,7 +27,6 @@ Yes, it usually is, but we don't update this fork immediatley after the original
 ## Installing
 You can watch [this](https://drive.google.com/file/d/1zlWv4t14ORqy7QuF_Sup7DLkf7pAgS90/view?usp=sharing) tutorial to make it more easy.
 
----
 
 Install `pnpm`:
 
