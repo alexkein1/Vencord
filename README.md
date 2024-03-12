@@ -28,7 +28,7 @@ Yes, it usually is, but we don't update this fork immediatley after the original
 You can watch [this](https://drive.google.com/file/d/1zlWv4t14ORqy7QuF_Sup7DLkf7pAgS90/view?usp=sharing) tutorial to make it more easy.
 
 
-Install `pnpm`:
+### Install `pnpm`:
 
 > [!IMPORTANT]
 > This next command may need to be run as admin/root depending on your system, and you may need to close and reopen your terminal for `pnpm` to be in your PATH.
