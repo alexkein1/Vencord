@@ -38,7 +38,6 @@ You can watch [this](https://drive.google.com/file/d/1zlWv4t14ORqy7QuF_Sup7DLkf7
 npm i -g pnpm
 ```
 
----
 
 > [!IMPORTANT]
 > Make sure you aren't using an admin/root terminal from here onwards. It **will** mess up your Discord/Vencord instance and you **will** most likely have to reinstall.
