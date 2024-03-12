@@ -55,7 +55,7 @@ cd Vencord
 pnpm install --frozen-lockfile
 ```
 
-Build this fork of Vencord:
+### Build Vencord
 
 ```shell
 pnpm build
