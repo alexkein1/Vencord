@@ -24,7 +24,7 @@ Yes, it usually is, but we don't update this fork immediatley after the original
 - Download Git from [here](https://git-scm.com/download).
 - Open a terminal and run the following commands:
 
-## Installing
+## Installation
 You can watch [this](https://drive.google.com/file/d/1zlWv4t14ORqy7QuF_Sup7DLkf7pAgS90/view?usp=sharing) tutorial to make it more easy.
 
 
