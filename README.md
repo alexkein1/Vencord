@@ -88,6 +88,8 @@ When you want to update your Discord client to the latest version of this fork, 
 
 ## Added
 
+- **[Copy Emoji as Formatted String](https://github.com/Tolga1452/Vencord/tree/main/src/plugins/CopyEmojiAsFormattedString)** Adds a button to copy an emoji as a formatted string.
+- **[Custom App Icons](https://github.com/Tolga1452/Vencord/tree/main/src/plugins/CustomAppIcons)** Add/upload your own custom (In-)App Icon(s).
 - **[Become Catgirl](<https://github.com/Tolga1452/Vencord/tree/main/src/plugins/becomeCatgirl>):** Turns your messages into a catgirl message.
 - **[Talk In Reverse](https://github.com/Tolga1452/Vencord/tree/main/src/plugins/talkInReverse):** Reverses the message content before sending it.
 - **[God Mode](https://github.com/Tolga1452/Vencord/tree/main/src/plugins/godMode):** Get all permissions (client-side).
