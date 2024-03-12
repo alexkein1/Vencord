@@ -17,7 +17,9 @@ Yes, it usually is, but we don't update this fork immediatley after the original
 
 ---
 
-# Dependencies
+# Setup
+
+## Requirements
  - Download the latest version of Node.js from [here](https://nodejs.org/en/download/current).
 - Download Git from [here](https://git-scm.com/download).
 - Open a terminal and run the following commands:
