@@ -12,7 +12,6 @@ No, this is a fork of Vencord with unofficial plugins. You can find the original
 ## Is this fork safe?
 Yes, this repository is safe. If you don't trust it, feel free to look at the source code.
 
----
 
 ## Is this fork up-to-date with original Vencord?
 Yes, it usually is, but we don't update this fork immediatley after the original Vencord is updated. You'll have to update it manually. We release a new version when there are necessary changes.
