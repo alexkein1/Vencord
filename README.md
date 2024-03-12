@@ -49,7 +49,7 @@ git clone https://github.com/Vendicated/Vencord
 cd Vencord
 ```
 
-Install the dependencies needed:
+### Install the dependencies needed
 
 ```shell
 pnpm install --frozen-lockfile
