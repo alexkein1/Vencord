@@ -17,10 +17,10 @@
 */
 
 import { addContextMenuPatch, removeContextMenuPatch } from "@api/ContextMenu";
-import { Devs } from "@utils/constants";
-import definePlugin from "@utils/types";
-import { Clipboard, Menu, React } from "@webpack/common";
 import { definePluginSettings } from "@api/Settings";
+import { Devs } from "@utils/constants";
+import definePlugin, { OptionType } from "@utils/types";
+import { Clipboard, Menu, React } from "@webpack/common";
 
 interface Emoji {
     type: "emoji",
@@ -41,22 +41,24 @@ export default definePlugin({
     description: "Adds button to copy emoji ID!",
     authors: [Devs.HAPPY_ENDERMAN, Devs.ANIKEIPS],
     settings,
-    
+
     expressionPickerPatch(children, props) {
-         if (!children.find(element => element.props.id === "copy-emoji-id")) {
+        if (!children.find(element => element.props.id === "copy-emoji-id")) {
             const data = props.target.dataset as Emoji;
             const firstChild = props.target.firstChild as HTMLImageElement;
             const isAnimated = firstChild && new URL(firstChild.src).pathname.endsWith(".gif");
             if (data.type === "emoji" && data.id) {
-                children.push(<Menu.MenuItem
-                    id="copy-emoji-id"
-                    key="copy-emoji-id"
-                    label={settings.store.formattedString ? "Copy as formatted string" : "Copy Emoji ID"}
-                    action={() => {
-                        const formatted_emoji_string = settings.store.formattedString ? `${isAnimated ? "<a:" : "<:"}${data.name}:${data.id}>` : `${data.id}`;
-                        Clipboard.copy(formatted_emoji_string);
-                    }}
-                />);
+                children.push((
+                    <Menu.MenuItem
+                        id="copy-emoji-id"
+                        key="copy-emoji-id"
+                        label={settings.store.formattedString ? "Copy as formatted string" : "Copy Emoji ID"}
+                        action={() => {
+                            const formatted_emoji_string = settings.store.formattedString ? `${isAnimated ? "<a:" : "<:"}${data.name}:${data.id}>` : `${data.id}`;
+                            Clipboard.copy(formatted_emoji_string);
+                        }}
+                    />
+                ));
             }
         }
     },
