@@ -17,9 +17,10 @@
 */
 
 import { addContextMenuPatch, removeContextMenuPatch } from "@api/ContextMenu";
+import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
-import definePlugin from "@utils/types";
-import { Clipboard, Menu, React, showToast,Toasts } from "@webpack/common";
+import definePlugin, { OptionType } from "@utils/types";
+import { Clipboard, Menu, React } from "@webpack/common";
 
 interface Emoji {
     type: "emoji",
@@ -27,30 +28,38 @@ interface Emoji {
     name: string;
 }
 
+const settings = definePluginSettings({
+    formattedString: {
+        type: OptionType.BOOLEAN,
+        description: "Use formatted string instead of emoji ID.",
+        default: false
+    }
+});
+
 export default definePlugin({
-    name: "CopyEmojiAsFormattedString",
-    description: "Add's button to copy emoji as formatted string!",
-    authors: [Devs.HAPPY_ENDERMAN],
+    name: "CopyEmojiID",
+    description: "Adds button to copy emoji ID!",
+    authors: [Devs.HAPPY_ENDERMAN, Devs.ANIKEIPS],
+    settings,
+
     expressionPickerPatch(children, props) {
-        if (!props.alreadyPatched) {
+        if (!children.find(element => element.props.id === "copy-emoji-id")) {
             const data = props.target.dataset as Emoji;
             const firstChild = props.target.firstChild as HTMLImageElement;
-
             const isAnimated = firstChild && new URL(firstChild.src).pathname.endsWith(".gif");
             if (data.type === "emoji" && data.id) {
-
-                children.push(<Menu.MenuItem
-                    id="copy-formatted-string"
-                    key="copy-formatted-string"
-                    label={"Copy as formatted string"}
-                    action={() => {
-                        const formatted_emoji_string = `${isAnimated ? "<a:" : "<:"}${data.name}:${data.id}>`;
-                        Clipboard.copy(formatted_emoji_string);
-                        showToast("Success! Copied to clipboard as formatted string.", Toasts.Type.SUCCESS);
-                    }}
-                />);
+                children.push((
+                    <Menu.MenuItem
+                        id="copy-emoji-id"
+                        key="copy-emoji-id"
+                        label={settings.store.formattedString ? "Copy as formatted string" : "Copy Emoji ID"}
+                        action={() => {
+                            const formatted_emoji_string = settings.store.formattedString ? `${isAnimated ? "<a:" : "<:"}${data.name}:${data.id}>` : `${data.id}`;
+                            Clipboard.copy(formatted_emoji_string);
+                        }}
+                    />
+                ));
             }
-            props.alreadyPatched = true;
         }
     },
     start() {
@@ -59,6 +68,4 @@ export default definePlugin({
     stop() {
         removeContextMenuPatch("expression-picker", this.expressionPickerPatch);
     }
-
-
 });
