@@ -53,11 +53,7 @@ export default definePlugin({
                     key="copy-emoji-id"
                     label={settings.store.formattedString ? "Copy as formatted string" : "Copy Emoji ID"}
                     action={() => {
-                        if (settings.store.formattedString) {
-                            const formatted_emoji_string = `${isAnimated ? "<a:" : "<:"}${data.name}:${data.id}>`;
-                        } else {
-                            const formatted_emoji_string = `${data.id}`;
-                        }
+                        const formatted_emoji_string = settings.store.formattedString ? `${isAnimated ? "<a:" : "<:"}${data.name}:${data.id}>` : `${data.id}`;
                         Clipboard.copy(formatted_emoji_string);
                     }}
                 />);
