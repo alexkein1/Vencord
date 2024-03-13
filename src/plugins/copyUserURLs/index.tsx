@@ -36,7 +36,7 @@ const UserContextMenuPatch: NavContextMenuPatchCallback = (children, { user }: U
         <Menu.MenuItem
             id="vc-copy-user-url"
             label="Copy User URL"
-            action={() => Clipboard.copy(`<https://discord.com/users/${user.id}>`)}
+            action={() => Clipboard.copy(`https://discord.com/users/${user.id}`)}
             icon={LinkIcon}
         />
     );
