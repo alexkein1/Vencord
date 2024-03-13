@@ -43,7 +43,7 @@ export default definePlugin({
     settings,
     
     expressionPickerPatch(children, props) {
-        if (!props.alreadyPatched) {
+         if (!children.find(element => element.props.id === "copy-emoji-id")) {
             const data = props.target.dataset as Emoji;
             const firstChild = props.target.firstChild as HTMLImageElement;
             const isAnimated = firstChild && new URL(firstChild.src).pathname.endsWith(".gif");
@@ -58,7 +58,6 @@ export default definePlugin({
                     }}
                 />);
             }
-            props.alreadyPatched = true;
         }
     },
     start() {
