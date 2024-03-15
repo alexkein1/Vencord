@@ -25,6 +25,7 @@ import { findByProps } from "@webpack";
 import { Button, FluxDispatcher, Forms, React, showToast, Toasts } from "@webpack/common";
 
 import AppIconModal from "./AppIconModal";
+import {Logger} from "@utils/Logger";
 
 function removeAppIcon() {
     const current_icon = findByProps("getCurrentDesktopIcon").getCurrentDesktopIcon();
@@ -68,7 +69,7 @@ export default definePlugin({
 
 
     start() {
-        console.warn("Warning: CustomAppIcons is in beta");
+        new Logger("customAppIcons").warn("CustomAppIcons is in beta");
         const appIcons = JSON.parse(localStorage.getItem("vc_app_icons") ?? "[]");
         for (const icon of appIcons) {
             findByProps("ICONS", "ICONS_BY_ID").ICONS.push(icon);
