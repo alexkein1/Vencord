@@ -30,7 +30,7 @@
         "uninject": "node scripts/runInstaller.mjs",
         "watch": "node --require=./scripts/suppressExperimentalWarnings.js scripts/build/build.mjs --watch",
         "sync": "git checkout -b Vendicated-main main && git pull https://github.com/Vendicated/Vencord.git main && git checkout main && git merge --no-ff Vendicated-main && git branch -d Vendicated-main",
-        "update": "git pull && pnpm build && pnpm inject"
+        "update": "git pull && pnpm build"
     },
     "dependencies": {
         "@sapphi-red/web-noise-suppressor": "0.3.3",
