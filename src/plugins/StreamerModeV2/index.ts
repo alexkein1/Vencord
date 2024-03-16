@@ -20,9 +20,9 @@ import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
-    name: "StreamerModeV2",
+    name: "streamerModeV2",
     description: "Blurs servers, direct messages, friends and more upon taking a screenshot",
-    authors: [],
+    authors: [Devs.HumanCat222],
 
     start: () => {
         const injectCSS = css => {
