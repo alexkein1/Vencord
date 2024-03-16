@@ -24,5 +24,92 @@ export default definePlugin({
     description: "Blurs servers, direct messages, friends and more upon taking a screenshot",
     authors: [],
 
-   
+    start: () => {
+        const injectCSS = css => {
+            let el = document.createElement('style');
+            el.type = 'text/css';
+            el.innerText = css;
+            return el;
+        };
+
+        let css = injectCSS(`.interactive__776ee  {
+    filter: blur(9px) brightness(0.4)
+}
+
+.interactive__776ee:hover  {
+    filter: blur(0px) brightness(1)
+}
+
+.itemCard__1f162 {
+    filter: blur(9px) brightness(0.9)
+}
+
+.itemCard__1f162:hover {
+    filter: blur(0px) brightness(1)
+}
+
+.interactiveSelected_ec846b {
+    filter: blur(0px) brightness(1)
+}
+
+.wrapper_d281dd {
+    filter: blur(9px) brightness(0.4)
+}
+
+.friendWrapper__70b6f {
+    filter: blur(9px) brightness(0.4)
+}
+
+.friendWrapper__70b6f:hover {
+    filter: blur(0px) brightness(1)
+}
+
+.peopleListItem_d14722 {
+    filter: blur(9px) brightness(0.4)
+}
+
+.peopleListItem_d14722:hover {
+    filter: blur(0px) brightness(1)
+}
+
+.result__25f11 {
+    filter: blur(9px) brightness(0.4)
+}
+
+.result__25f11[aria-selected="true"] {
+    filter: blur(0px) brightness(1)
+}
+
+.selected_f5ec8e {
+    filter: blur(0px) brightness(1)
+}
+
+.linkButton_ebd2ba {
+    filter: blur(0px) brightness(1)
+}
+
+[aria-label="Direct Messages"] {
+    filter: blur(0px) brightness(1)
+}`);
+
+        function toggleStreamerModeV2(enable) {
+            if (enable) { 
+                document.head.appendChild(css);
+            } else {
+                document.head.removeChild(css);
+            }
+        }
+
+        document.addEventListener('keydown', (event)=> {    
+            if (event.key === "Shift") {
+                toggleStreamerModeV2(true)
+            }
+        })
+
+        document.addEventListener('keyup', (event)=> {    
+            if (event.key === "Shift") {
+                setTimeout(function(){toggleStreamerModeV2(false)}, 1000)
+            }
+        })
+    }
 });
