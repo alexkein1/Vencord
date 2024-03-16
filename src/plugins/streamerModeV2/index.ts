@@ -19,6 +19,9 @@
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
+let down = null
+let up = null
+
 export default definePlugin({
     name: "streamerModeV2",
     description: "Blurs servers, direct messages, friends and more upon taking a screenshot",
@@ -100,16 +103,27 @@ export default definePlugin({
             }
         }
 
-        document.addEventListener('keydown', (event)=> {    
-            if (event.key === "Shift") {
-                toggleStreamerModeV2(true)
+        if (down === null) {
+            down = function(event) {    
+                if (event.key === "Shift") {
+                    toggleStreamerModeV2(true)
+                }
             }
-        })
-
-        document.addEventListener('keyup', (event)=> {    
-            if (event.key === "Shift") {
-                setTimeout(function(){toggleStreamerModeV2(false)}, 1000)
+        }
+        
+         if (up === null) {
+            up = function(event) {    
+                if (event.key === "Shift") {
+                    setTimeout(function(){toggleStreamerModeV2(false)}, 1000)
+                }
             }
-        })
+        }
+        
+        document.addEventListener('keydown', down)
+        document.addEventListener('keyup', up)
+    },
+    stop: () => {
+        document.removeEventListener('keydown', down)
+        document.removeEventListener('keyup', up)
     }
 });
