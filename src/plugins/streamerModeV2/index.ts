@@ -19,7 +19,7 @@
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
-let down = null
+let down: ((event: any) => void) | null = null;
 let up = null
 
 export default definePlugin({
