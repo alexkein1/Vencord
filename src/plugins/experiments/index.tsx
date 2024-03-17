@@ -22,7 +22,7 @@ import { ErrorCard } from "@components/ErrorCard";
 import { Devs } from "@utils/constants";
 import { Margins } from "@utils/margins";
 import definePlugin, { OptionType } from "@utils/types";
-import { findByPropsLazy } from "@webpack";
+import { findByPropsLazy, findStore  } from "@webpack";
 import { Forms, React } from "@webpack/common";
 
 const KbdStyles = findByPropsLazy("key", "removeBuildOverride");
@@ -39,6 +39,12 @@ const settings = definePluginSettings({
         type: OptionType.BOOLEAN,
         default: false,
         restartNeeded: true
+    },
+     activity_shelf: {
+        description: "Enable developer activity shelf",
+        type: OptionType.BOOLEAN,
+        default: false,
+        restartNeeded: false
     }
 });
 
@@ -53,7 +59,8 @@ export default definePlugin({
         Devs.Nickyux,
         Devs.BanTheNons,
         Devs.Nuckyz,
-        (Devs.Tolgchu ?? { name: "✨Tolgchu✨", id: 329671025312923648n })
+        (Devs.Tolgchu ?? { name: "✨Tolgchu✨", id: 329671025312923648n }),
+        Devs.HAPPY_ENDERMAN
     ],
     settings,
 
@@ -99,10 +106,13 @@ export default definePlugin({
         originalChannel = window.GLOBAL_ENV.RELEASE_CHANNEL;
 
         if (settings.store.staging) window.GLOBAL_ENV.RELEASE_CHANNEL = "staging";
+        if (settings.store.activity_shelf) findStore("DeveloperActivityShelfStore").getIsEnabled = () => { return true; };
     },
 
     stop: () => {
         if (window.GLOBAL_ENV.RELEASE_CHANNEL !== originalChannel) window.GLOBAL_ENV.RELEASE_CHANNEL = originalChannel;
+        if (settings.store.activity_shelf) findStore("DeveloperActivityShelfStore").getIsEnabled = () => { return false; };
+
     },
 
     settingsAboutComponent: () => {
