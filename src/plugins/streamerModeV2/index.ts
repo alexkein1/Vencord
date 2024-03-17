@@ -24,7 +24,7 @@ let up = null
 
 export default definePlugin({
     name: "streamerModeV2",
-    description: "Blurs servers, direct messages, friends and more upon taking a screenshot",
+    description: "Blurs servers, direct messages, friends and more upon pressing Shift",
     authors: [Devs.HumanCat222],
 
     start: () => {
