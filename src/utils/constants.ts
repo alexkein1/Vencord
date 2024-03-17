@@ -56,7 +56,7 @@ export const Devs = /* #__PURE__*/ Object.freeze({
     },
     HumanCat222: {
         name: "HumanCat222",
-        id: 676018450115854347
+        id: 676018450115854347n
     },
     Cyn: {
         name: "Cynosphere",
