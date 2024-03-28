@@ -92,7 +92,7 @@ const messageCtxPatch: NavContextMenuPatchCallback = (children, { message }) => 
 
 export default definePlugin({
     name: "Hide Message",
-    description: "Allows you to hide messages. The messages will be back when switch channels.",
+    description: "Allows you to hide messages. The messages will be back when you switch channels.",
     authors: [(Devs.Tolgchu ?? { name: "✨Tolgchu✨", id: 329671025312923648n })],
     contextMenus: {
         "message": messageCtxPatch
