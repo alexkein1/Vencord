@@ -19,9 +19,10 @@
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { classNameFactory } from "@api/Styles";
 import { Devs } from "@utils/constants";
+import { Logger } from "@utils/Logger";
 import { classes } from "@utils/misc";
 import definePlugin from "@utils/types";
-import { Menu } from "@webpack/common";
+import { Menu, showToast, Toasts } from "@webpack/common";
 
 function HideMessageIcon({ className }: { className?: string; }) {
     return (
@@ -43,9 +44,37 @@ function findIndex(group: any[]) {
     else return index + 1;
 }
 
-const messageCtxPatch: NavContextMenuPatchCallback = (children, { message }) => {
-    if (!message.content) return;
+function hideMessage(channelId: string, messageId: string, authorId: string) {
+    let first = false;
 
+    const element = document.querySelector(`#chat-messages-${channelId}-${messageId}`);
+
+    if (!element) return showToast("Message not found.", Toasts.Type.FAILURE);
+
+    const children = Array.from(element.parentElement?.children ?? []);
+    const index = children.indexOf(element);
+
+    if (element.firstElementChild?.firstElementChild?.firstElementChild?.tagName === "IMG") {
+        if (children[index + 1].getAttribute("data-author-id") === authorId && children[index + 1].firstElementChild?.firstElementChild?.firstElementChild?.tagName !== "IMG") {
+            first = true;
+
+            element.firstElementChild?.firstElementChild?.querySelector(`#message-content-${messageId}`)?.remove();
+            element.classList.add("hidden-message");
+        }
+    } else {
+        if (children[index - 1].firstElementChild?.firstElementChild?.firstElementChild?.tagName === "IMG" && children[index - 1].classList.contains("hidden-message") && children[index + 1].getAttribute("data-author-id") !== authorId) {
+            children[index - 1].remove();
+
+            new Logger("Hide Message").info(children[index - 2].classList);
+
+            if (children[index - 2].classList.contains("divider__01aed") && children[index + 1].classList.contains("divider__01aed")) children[index - 2].remove();
+        }
+    }
+
+    if (!first) element.remove();
+}
+
+const messageCtxPatch: NavContextMenuPatchCallback = (children, { message }) => {
     const group = findGroupChildrenByChildId("copy-text", children);
     if (!group) return;
 
@@ -54,39 +83,20 @@ const messageCtxPatch: NavContextMenuPatchCallback = (children, { message }) => 
             id="vc-hide"
             label="Hide Message"
             icon={HideMessageIcon}
-            action={async () => {
-                const style = document.createElement("style");
-
-                style.type = "text/css";
-                style.className = "hidden-message";
-                style.innerHTML = `#chat-messages-${message.channel_id}-${message.id} { display: none; }`;
-
-                document.documentElement.appendChild(style);
-            }}
+            action={async () => hideMessage(message.channel_id, message.id, message.author.id)}
         />
     ));
 
-    document.getElementById("message-vc-hide")?.classList.add("colorDanger_eec36d");
+    document.getElementById("message-vc-hide")?.classList.add("colorDanger__08c25");
 };
-
-function showMessages() {
-    document.querySelectorAll(".hidden-message").forEach(style => style.remove());
-}
 
 export default definePlugin({
     name: "Hide Message",
-    description: "Allows you to hide messages. HAS SOME BUGS WITH MESSAGE AUTHORS. The messages will be back when you press Alt + U or reload your Discord.",
+    description: "Allows you to hide messages. The messages will be back when switch channels.",
     authors: [(Devs.Tolgchu ?? { name: "✨Tolgchu✨", id: 329671025312923648n })],
     contextMenus: {
         "message": messageCtxPatch
     },
-    start() {
-        document.addEventListener("keydown", event => {
-            if (event.key === "u" && event.altKey) showMessages();
-        });
-    },
-
-    stop() {
-        showMessages();
-    },
+    start() { },
+    stop() { },
 });
