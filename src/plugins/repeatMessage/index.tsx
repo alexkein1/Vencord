@@ -57,7 +57,9 @@ function repeatMessage(channelId: string, id: string, content: string, stickers:
     });
 }
 
-const messageCtxPatch: NavContextMenuPatchCallback = (children, { message }: { message: Message }) => {
+const messageCtxPatch: NavContextMenuPatchCallback = (children, { message }: { message: Message; }) => {
+    if (!message.content && message.stickerItems.length === 0) return;
+
     const group = findGroupChildrenByChildId("copy-text", children);
     if (!group) return;
 
@@ -102,6 +104,8 @@ export default definePlugin({
     },
     start() {
         addButton("vc-repeat", message => {
+            if (!message.content && message.stickerItems.length === 0) return null;
+
             return {
                 label: "Repeat (Click) / Repeat and Reply (Shift + Click)",
                 icon: RepeatMessageIcon,
