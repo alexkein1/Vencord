@@ -453,6 +453,10 @@ export const Devs = /* #__PURE__*/ Object.freeze({
     kamikaze: {
         name: "kamikaze",
         id: 1215790526910042212n
+    },
+    D3SOX: {
+        name: "d3sox",
+        id: 201052085641281538n
     }
 } satisfies Record<string, Dev>);
 
