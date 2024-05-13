@@ -67,7 +67,7 @@ export default definePlugin({
     settings,
     patches: [
         {
-            find: "}),(0,l.jsx)(T.default.Title,{className:en.title,children:er.default.Messages.COLLECTIBLES_SHOP})]",
+            find: "default.Messages.COLLECTIBLES_SHOP})]})",
             replacement: [{
                 match: "{className:en.title,children:er.default.Messages.COLLECTIBLES_SHOP}",
                 replace: "{className:en.title,children:[er.default.Messages.COLLECTIBLES_SHOP,$self.PreviewToggle()]}"
