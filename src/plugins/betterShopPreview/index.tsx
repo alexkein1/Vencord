@@ -62,7 +62,7 @@ const PreviewToggle = () => {
 
 export default definePlugin({
     name: "Better Shop Preview",
-    description: "Uses your avatar for avatar decoration previews in the Discord Shop.",
+    description: "Uses your avatar for avatar decoration previews in the Discord Shop (without hovering).",
     authors: [(Devs.Tolgchu ?? { name: "✨Tolgchu✨", id: 329671025312923648n })],
     settings,
     patches: [
