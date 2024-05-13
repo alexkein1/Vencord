@@ -20,10 +20,12 @@ import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { ErrorCard } from "@components/ErrorCard";
 import { Devs } from "@utils/constants";
+import { Logger } from "@utils/Logger";
 import { Margins } from "@utils/margins";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByPropsLazy } from "@webpack";
-import { Forms, React } from "@webpack/common";
+import { Forms, React, UserStore } from "@webpack/common";
+import { User } from "discord-types/general";
 
 const KbdStyles = findByPropsLazy("key", "removeBuildOverride");
 
@@ -85,8 +87,8 @@ export default definePlugin({
             predicate: () => settings.store.enableIsStaff,
             replacement: [
                 {
-                    match: /=>*?(\i)\.hasFlag\((\i\.\i)\.STAFF\)}/,
-                    replace: (_, user, flags) => `=>Vencord.Webpack.Common.UserStore.getCurrentUser()?.id===${user}.id||${user}.hasFlag(${flags}.STAFF)}`
+                    match: /(?<=>)(\i)\.hasFlag\((\i\.\i)\.STAFF\)(?=})/,
+                    replace: (_, user, flags) => `$self.isStaff(${user},${flags})`
                 },
                 {
                     match: /hasFreePremium\(\){return this.isStaff\(\)\s*?\|\|/,
@@ -103,9 +105,18 @@ export default definePlugin({
         }
     ],
 
+    isStaff(user: User, flags: any) {
+        try {
+            return UserStore.getCurrentUser()?.id === user.id || user.hasFlag(flags.STAFF);
+        } catch (err) {
+            new Logger("Experiments").error(err);
+            return user.hasFlag(flags.STAFF);
+        }
+    },
+
     start: () => {
         originalChannel = window.GLOBAL_ENV.RELEASE_CHANNEL;
-        originalAPI = window.GLOBAL_ENV.API_VERSION;  
+        originalAPI = window.GLOBAL_ENV.API_VERSION;
 
         if (settings.store.staging) window.GLOBAL_ENV.RELEASE_CHANNEL = "staging";
         if (settings.store.apiV10) window.GLOBAL_ENV.API_VERSION = "10";
