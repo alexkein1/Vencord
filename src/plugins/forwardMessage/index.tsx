@@ -88,7 +88,7 @@ function validateChannel(input: string) {
     if (!ChannelStore.hasChannel(input)) return "Invalid channel ID. If the channel exists, please load it by switching first.";
 
     const channel = ChannelStore.getChannel(input);
-    const ChannelType = findByPropsLazy("ChannelTypes");
+    const ChannelType = findByPropsLazy("ChannelTypes").ChannelTypes;
 
     if ([ChannelType.GUILD_CATEGORY, ChannelType.DIRECTORY, ChannelType.FORUM, ChannelType.MEDIA, ChannelType.STORE].includes(channel.type)) return "You cannot forward messages to this channel type.";
 
