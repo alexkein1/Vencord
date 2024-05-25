@@ -28,6 +28,8 @@ import { findByPropsLazy } from "@webpack";
 import { Button, ChannelStore, Forms, GuildStore, Menu, MessageActions, React, UserStore } from "@webpack/common";
 import { Message } from "discord-types/general";
 
+const ChannelType = findByPropsLazy("ChannelTypes");
+
 function ForwardMessageIcon({ className }: { className?: string; }) {
     return (
         <svg
@@ -42,7 +44,7 @@ function ForwardMessageIcon({ className }: { className?: string; }) {
 }
 
 function forwardMessage(content: string, message: Message, channelId: string) {
-    const channel = ChannelStore.getChannel(channelId);
+    const channel = ChannelStore.getChannel(message.channel_id);
     const guild = GuildStore.getGuild(channel.guild_id);
     const user = UserStore.getCurrentUser();
 
@@ -83,13 +85,13 @@ function forwardMessage(content: string, message: Message, channelId: string) {
 
 function validateChannel(input: string) {
     const snowflakeRegex = /^[0-9]{17,19}$/;
-    const isSnowflake = snowflakeRegex.test(input);
 
-    if (!isSnowflake) return "Invalid channel ID.";
+    if (!snowflakeRegex.test(input)) return "Invalid channel ID.";
+    if (!ChannelStore.hasChannel(input)) return "Invalid channel ID. If the channel exists, please load it by switching first.";
 
-    const channel = ChannelStore.hasChannel(input);
+    const channel = ChannelStore.getChannel(input);
 
-    if (!channel) return "Invalid channel ID. If the channel exists, please load it by switching first.";
+    if ([ChannelType.GUILD_CATEGORY, ChannelType.DIRECTORY, ChannelType.FORUM, ChannelType.MEDIA, ChannelType.STORE].includes(channel.type)) return "You cannot forward messages to this channel type.";
 
     return true;
 }
