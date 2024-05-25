@@ -382,9 +382,17 @@ export const Devs = /* #__PURE__*/ Object.freeze({
         name: "ProffDea",
         id: 609329952180928513n
     },
+    UlyssesZhan: {
+        name: "UlyssesZhan",
+        id: 586808226058862623n
+    },
     ant0n: {
         name: "ant0n",
         id: 145224646868860928n
+    },
+    Board: {
+        name: "BoardTM",
+        id: 285475344817848320n,
     },
     philipbry: {
         name: "philipbry",
@@ -421,6 +429,10 @@ export const Devs = /* #__PURE__*/ Object.freeze({
     Tolgchu: {
         name: "✨Tolgchu✨",
         id: 329671025312923648n
+    },
+    Noxillio: {
+        name: "Noxillio",
+        id: 138616536502894592n,
     },
     Kyuuhachi: {
         name: "Kyuuhachi",
@@ -462,6 +474,10 @@ export const Devs = /* #__PURE__*/ Object.freeze({
         name: "kamikaze",
         id: 1215790526910042212n
     },
+    JohnyTheCarrot: {
+        name: "JohnyTheCarrot",
+        id: 132819036282159104n
+    },
     puv: {
         name: "puv",
         id: 469441552251355137n
@@ -501,7 +517,31 @@ export const Devs = /* #__PURE__*/ Object.freeze({
     ImBanana: {
         name: "Im_Banana",
         id: 635250116688871425n
-    }
+    },
+    xocherry: {
+        name: "xocherry",
+        id: 221288171013406720n
+    },
+    ScattrdBlade: {
+        name: "ScattrdBlade",
+        id: 678007540608532491n
+    },
+    goodbee: {
+        name: "goodbee",
+        id: 658968552606400512n
+    },
+    Moxxie: {
+        name: "Moxxie",
+        id: 712653921692155965n,
+    },
+    Ethan: {
+        name: "Ethan",
+        id: 721717126523781240n,
+    },
+    nyx: {
+        name: "verticalsync",
+        id: 328165170536775680n
+    },
 } satisfies Record<string, Dev>);
 
 // iife so #__PURE__ works correctly
