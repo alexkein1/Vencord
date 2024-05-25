@@ -128,8 +128,6 @@ function ForwardModal({ message }: { message: Message; }) {
 }
 
 const messageCtxPatch: NavContextMenuPatchCallback = (children, { message }: { message: Message; }) => {
-    if (!message.content && message.stickerItems.length === 0) return;
-
     const group = findGroupChildrenByChildId("copy-text", children);
     if (!group) return;
 
