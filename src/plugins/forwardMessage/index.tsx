@@ -24,7 +24,7 @@ import { Margins } from "@utils/margins";
 import { classes } from "@utils/misc";
 import { closeModal, ModalContent, ModalHeader, ModalRoot, openModalLazy } from "@utils/modal";
 import definePlugin from "@utils/types";
-import { findByPropsLazy } from "@webpack";
+import { findByProps, findByPropsLazy } from "@webpack";
 import { Button, ChannelStore, Forms, GuildStore, Menu, MessageActions, React, UserStore } from "@webpack/common";
 import { Message } from "discord-types/general";
 
@@ -88,7 +88,7 @@ function validateChannel(input: string) {
     if (!ChannelStore.hasChannel(input)) return "Invalid channel ID. If the channel exists, please load it by switching first.";
 
     const channel = ChannelStore.getChannel(input);
-    const ChannelType = findByPropsLazy("ChannelTypes").ChannelTypes;
+    const ChannelType = findByProps("ChannelTypes").ChannelTypes;
 
     if ([ChannelType.GUILD_CATEGORY, ChannelType.DIRECTORY, ChannelType.FORUM, ChannelType.MEDIA, ChannelType.STORE].includes(channel.type)) return "You cannot forward messages to this channel type.";
 
