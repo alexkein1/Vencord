@@ -39,7 +39,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "CopyEmojiID",
     description: "Adds button to copy emoji ID!",
-    authors: [Devs.HAPPY_ENDERMAN, Devs.ANIKEIPS],
+    authors: [Devs.HappyEnderman, Devs.ANIKEIPS],
     settings,
 
     expressionPickerPatch(children, props) {
