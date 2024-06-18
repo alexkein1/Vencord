@@ -16,6 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { definePluginSettings } from "@api/Settings";
 import { disableStyle, enableStyle } from "@api/Styles";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { ErrorCard } from "@components/ErrorCard";
@@ -48,6 +49,12 @@ const settings = definePluginSettings({
         type: OptionType.BOOLEAN,
         default: false,
         restartNeeded: true
+    },
+    toolbarDevMenu: {
+        type: OptionType.BOOLEAN,
+        description: "Change the Help (?) toolbar button (top right in chat) to Discord's developer menu",
+        default: false,
+        restartNeeded: true
     }
 });
 
@@ -66,6 +73,8 @@ export default definePlugin({
         (Devs.Tolgchu ?? { name: "✨Tolgchu✨", id: 329671025312923648n }),
         (Devs.TRAOX ?? { name: "TraoX", id: 935621080092123156n })
     ],
+
+    settings,
 
     patches: [
         {
@@ -95,6 +104,16 @@ export default definePlugin({
             replacement: {
                 match: /\i\.isStaff\(\)/,
                 replace: "true"
+            },
+            predicate: () => settings.store.toolbarDevMenu
+        },
+
+        // makes the Favourites Server experiment allow favouriting DMs and threads
+        {
+            find: "useCanFavoriteChannel",
+            replacement: {
+                match: /!\(\i\.isDM\(\)\|\|\i\.isThread\(\)\)/,
+                replace: "true",
             }
         }
     ],
