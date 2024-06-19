@@ -67,7 +67,7 @@ function hideMessage(channelId: string, messageId: string, authorId: string) {
 
             new Logger("Hide Message").info(children[index - 2].classList);
 
-            if (children[index - 2].classList.contains("divider__01aed") && children[index + 1].classList.contains("divider__01aed")) children[index - 2].remove();
+            if (children[index - 2].classList.contains("divider_d5deea") && children[index + 1].classList.contains("divider_d5deea")) children[index - 2].remove();
         }
     }
 
@@ -87,7 +87,7 @@ const messageCtxPatch: NavContextMenuPatchCallback = (children, { message }) => 
         />
     ));
 
-    document.getElementById("message-vc-hide")?.classList.add("colorDanger__08c25");
+    document.getElementById("message-vc-hide")?.classList.add("colorDanger_d90b3d");
 };
 
 export default definePlugin({
