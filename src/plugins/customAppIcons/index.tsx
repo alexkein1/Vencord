@@ -19,13 +19,13 @@
 import { Link } from "@components/Link";
 import { Devs } from "@utils/constants";
 import { localStorage } from "@utils/localStorage";
+import { Logger } from "@utils/Logger";
 import { closeAllModals, openModal } from "@utils/modal";
 import definePlugin from "@utils/types";
 import { findByProps } from "@webpack";
 import { Button, FluxDispatcher, Forms, React, showToast, Toasts } from "@webpack/common";
 
 import AppIconModal from "./AppIconModal";
-import { Logger } from "@utils/Logger";
 
 function removeAppIcon() {
     const current_icon = findByProps("getCurrentDesktopIcon").getCurrentDesktopIcon();
@@ -33,8 +33,8 @@ function removeAppIcon() {
     const index = icons.findIndex(icon => current_icon === icon.id);
     if (index !== -1) {
         icons = icons.filter(e => e.id !== current_icon);
-        delete findByProps("ICONS", "ICONS_BY_ID").ICONS_BY_ID[current_icon];
-        delete findByProps("ICONS", "ICONS_BY_ID").ICONS[findByProps("ICONS", "ICONS_BY_ID").ICONS.findIndex((icon => current_icon === icon?.id))];
+        delete findByProps("UZ", "QA").QA[current_icon];
+        delete findByProps("UZ", "QA").UZ[findByProps("UZ", "QA").UZ.findIndex((icon => current_icon === icon?.id))];
         localStorage.setItem("vc_app_icons", JSON.stringify(icons));
         showToast("Icon deleted successfully!", Toasts.Type.SUCCESS);
         FluxDispatcher.dispatch({
@@ -55,7 +55,7 @@ export default definePlugin({
     authors: [Devs.HappyEnderman, Devs.SerStars],
     patches: [
         {
-            find: ".PremiumUpsellTypes.APP_ICON_UPSELL",
+            find: /\i\.\i\.APP_ICON_UPSELL/,
             replacement: [
                 {
                     match: /\w+\.jsx\)\(\w+,{markAsDismissed:\w+,isCoachmark:\w+}\)/,
@@ -72,8 +72,8 @@ export default definePlugin({
         new Logger("customAppIcons").warn("CustomAppIcons is in beta");
         const appIcons = JSON.parse(localStorage.getItem("vc_app_icons") ?? "[]");
         for (const icon of appIcons) {
-            findByProps("ICONS", "ICONS_BY_ID").ICONS.push(icon);
-            findByProps("ICONS", "ICONS_BY_ID").ICONS_BY_ID[icon.id] = icon;
+            findByProps("UZ", "QA").UZ.push(icon);
+            findByProps("UZ", "QA").QA[icon.id] = icon;
         }
     },
     stop() {
@@ -101,12 +101,12 @@ export default definePlugin({
             <><Forms.FormTitle>
                 <Forms.FormTitle>How to use?</Forms.FormTitle>
             </Forms.FormTitle>
-                <Forms.FormText>
-                    <Forms.FormText>Go to <Link href="/settings/appearance" onClick={e => { e.preventDefault(); closeAllModals(); FluxDispatcher.dispatch({ type: "USER_SETTINGS_MODAL_SET_SECTION", section: "Appearance" }); }}>Appearance Settings</Link> tab.</Forms.FormText>
-                    <Forms.FormText>Scroll down to "In-app Icons" and click on "Preview App Icon".</Forms.FormText>
-                    <Forms.FormText>And upload your own custom icon!</Forms.FormText>
-                    <Forms.FormText>You can only use links when you are uploading your Custom Icon.</Forms.FormText>
-                </Forms.FormText></>
+            <Forms.FormText>
+                <Forms.FormText>Go to <Link href="/settings/appearance" onClick={e => { e.preventDefault(); closeAllModals(); FluxDispatcher.dispatch({ type: "USER_SETTINGS_MODAL_SET_SECTION", section: "Appearance" }); }}>Appearance Settings</Link> tab.</Forms.FormText>
+                <Forms.FormText>Scroll down to "In-app Icons" and click on "Preview App Icon".</Forms.FormText>
+                <Forms.FormText>And upload your own custom icon!</Forms.FormText>
+                <Forms.FormText>You can only use links when you are uploading your Custom Icon.</Forms.FormText>
+            </Forms.FormText></>
         );
     }
 });
