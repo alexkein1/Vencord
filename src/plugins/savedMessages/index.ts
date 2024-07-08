@@ -19,6 +19,7 @@
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
+import { showToast, Toasts } from "@webpack/common";
 
 import overwriteRequest from "./utils/overwriteRequest";
 
@@ -50,7 +51,11 @@ export default definePlugin({
         try {
             getSavedMessages();
         } catch (error) {
-            getSavedMessages();
+            try {
+                getSavedMessages();
+            } catch (e) {
+                showToast("Failed to load a function for Saved Messages plugin. Please reload Discord to try again.", Toasts.Type.FAILURE);
+            }
         }
 
         function postSavedMessages() {
@@ -60,7 +65,11 @@ export default definePlugin({
         try {
             postSavedMessages();
         } catch (error) {
-            postSavedMessages();
+            try {
+                postSavedMessages();
+            } catch (e) {
+                showToast("Failed to load a function for Saved Messages plugin. Please reload Discord to try again.", Toasts.Type.FAILURE);
+            }
         }
     },
     stop() { }
