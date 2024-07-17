@@ -10,7 +10,7 @@ import randomId from "./randomId";
 
 export default function overwriteRequest(method: string, endpoint: string, ...overwrites: string[]) {
     try {
-        const id = randomId();
+        const id = `sm_${randomId()}`;
         const run = `
                         const ${id} = Vencord.Webpack.findByProps("J9", "Jt", "tn").tn.${method};
 
@@ -31,7 +31,7 @@ export default function overwriteRequest(method: string, endpoint: string, ...ov
 
         eval(run);
     } catch (error) {
-        new Logger("Saved Messages").error(`${error}\n\nIf you didn't receive the "Failed to start Saved Messages" error, the means the plugin fixed itself.`);
+        new Logger("Saved Messages").error(error);
 
         throw error;
     }
